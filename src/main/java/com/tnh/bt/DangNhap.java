@@ -15,7 +15,7 @@ public abstract class DangNhap {
 	public abstract boolean isDangNhap();
 
 	public void dangXuat() {
-		System.out.println("Đăng xuất thành công.\n");
+		System.out.println("Dang xuat thanh cong\n");
 	}
 	
 	public static boolean isMatKhauHopLe(String matKhau) {

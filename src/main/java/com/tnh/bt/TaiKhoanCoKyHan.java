@@ -19,33 +19,33 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 
 	public void napTien(double soTien) {
 		if (LocalDate.now().compareTo(ngayDaoHan) < 0) {
-			System.out.println("Không thể nạp tiền khi chưa dến ngày đáo hạn.");
+			System.out.println("Khong the nap tien khi chua den ngay dao han.");
 		} else if (soTien <= 0) {
-			System.out.println("Số tiền nạp phải lớn hơn 0.");
+			System.out.println("So tien nap phai lon hon 0");
 		} else if (LocalDate.now().compareTo(ngayDaoHan) >= 0 && soTien > 0) {
 			this.soDu += soTien;
-			System.out.println("Đã gửi tiền thành công");
-			System.out.printf("Số dư: %.2f\n", this.soDu);
+			System.out.println("Da gui tien thanh cong");
+			System.out.printf("So du: %.2f\n", this.soDu);
 		}
 
 	}
 
 	public boolean isRutTien() {
 		if (LocalDate.now().compareTo(ngayDaoHan) < 0) {
-			System.out.println("Không thể rút tiền khi chưa dến ngày đáo hạn.");
-			System.out.print("Nếu bạn rút tiền ngay bây giờ, bạn sẽ nhận lãi suất không kỳ hạn\n"
-					+ "Bạn có đồng ý rút không?\n1.Có\t2.Không: ");
+			System.out.println("Khong the rut tien khi chua den ngay dao han!");
+			System.out.print("\n"
+					+ "Ban co dong y rut khong?\n1. Co\t2. Khong: ");
 			int choose;
 			do {
 				choose = Integer.parseInt(CauHinh.sc.nextLine());
 				if (choose < 1 || choose > 2)
-					System.out.print("Nhập sai, vui lòng nhập lại: ");
+					System.out.print("Nhap sai, vui long nhap lai: ");
 			} while (choose < 1 || choose > 2);
 			if (choose == 1) {
 				capNhatlaiSuat();
 				return true;
 			} else {
-				System.out.println("Đã hủy dịch vụ rút tiền.");
+				System.out.println("Da huy dich vu rut tien");
 				return false;
 			}
 
@@ -56,7 +56,7 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 
 	public void output() {
 		super.output();
-		System.out.printf("Kỳ hạn: %s\nNgày đáo hạn: %s\n", this.kyHan,
+		System.out.printf("Ky han: %s\nNgay dao han: %s\n", this.kyHan,
 				this.ngayDaoHan.format(DateTimeFormatter.ofPattern(CauHinh.PATTERN)));
 	}
 	

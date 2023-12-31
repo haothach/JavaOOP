@@ -24,13 +24,13 @@ public class KhachHang implements DoiTuong {
 
 	private TaiKhoanKhongKyHan tkKhongKyHan;
 
-	private List<TaiKhoanCoKyHan> tkCoKyhan = new ArrayList<>();
+	private List<TaiKhoanCoKyHan> tkCoKyhan = new ArrayList<TaiKhoanCoKyHan>();
 
 	private NguoiDungDangNhap tkDangNhap;
 
 	{
-		this.maKH = String.format("%s%04d", LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyy")), ++dem);
-	}
+		this.maKH = String.format ("%s%04d", LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyy")), ++dem);
+	}           
 
 	public KhachHang() {
 	}
@@ -47,31 +47,31 @@ public class KhachHang implements DoiTuong {
 	@Override
 	public void moTkKyHan() {
 		if (this.tkKhongKyHan == null) {
-			System.out.println("Chưa mở tài khoản không kỳ hạn.\n");
+			System.out.println("Chua mo tai khoan khong ky han\n");
 			return;
 		}
-		System.out.print("Nhập số tiền: ");
+		System.out.print("Nhap so tien: ");
 		double soTien = Double.parseDouble(CauHinh.sc.nextLine());
 		if (this.tkKhongKyHan.getSoDu() - soTien > 50000 && soTien >= 100000) {
 			kyHanOutput();
-			System.out.print("Chọn: ");
+			System.out.print("Chon: ");
 			int choose;
 			do {
 				choose = Integer.parseInt(CauHinh.sc.nextLine());
 				if (choose < 1 || choose > KyHan.values().length) {
-					System.out.print("Nhập sai, nhập lại: ");
+					System.out.print("Nhap sai, nhap lai!");
 				}
 			} while (choose < 1 || choose > KyHan.values().length);
 			TaiKhoanCoKyHan tkc = new TaiKhoanCoKyHan(soTien, KyHan.values()[choose - 1]);
-			System.out.printf("Đã mở tài khoản có kỳ hạn.\n");
+			System.out.printf("Da mo tai khoan co ky han\n");
 			tkc.output();
 			this.tkCoKyhan.add(tkc);
 			this.tkKhongKyHan.soDu -= soTien;
 			this.tkKhongKyHan.capNhatlaiSuat();
 		} else if (soTien < 100000) {
-			System.out.println("Số tiền tối thiểu để mở tài khoản là 100 nghìn");
+			System.out.println("So tien toi thieu de mo tai khoan la 100 nghin");
 		} else {
-			System.out.println("Số tiền không đủ để mở tài khoản");
+			System.out.println("So tien khong du de mo tai khoan");
 		}
 	}
 

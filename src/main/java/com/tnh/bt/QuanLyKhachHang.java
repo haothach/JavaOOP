@@ -7,22 +7,22 @@ import java.util.List;
 public class QuanLyKhachHang {
 	private AdminDangNhap ad;
 
-	private List<KhachHang> ds = new ArrayList<>();
+	private List<KhachHang> ds = new ArrayList<KhachHang>();
 	
 	public boolean isAdmin() {
 		return ad.isDangNhap();
 	}
 
 	public void adminDangNhap() {
-		System.out.print("Nhập tài khoản: ");
+		System.out.print("Nhap tai khoan: ");
 		String admin = CauHinh.sc.nextLine();
-		System.out.print("Nhập mật khẩu: ");
+		System.out.print("Nhap mat khau: ");
 		String mk = CauHinh.sc.nextLine();
 		this.ad = new AdminDangNhap(admin, mk);
 		if (isAdmin()) {
-			System.out.println("Đăng nhập thành công với quyền quản trị.\n");
+			System.out.println("Dang nhap thanh cong voi quyen quan tri\n");
 		} else {
-			System.out.println("Đăng nhập thất bại. Vui lòng kiểm tra lại tên đăng nhập và mật khẩu.\n");
+			System.out.println("Dang nhap that bai. Vui long kiem tra lai ten dang nhap va mat khau.\n");
 		}
 	}
 
@@ -34,25 +34,25 @@ public class QuanLyKhachHang {
 			a.setTkDangNhap(new NguoiDungDangNhap(user, mk));
 
 			this.ds.addAll(Arrays.asList(a));
-			System.out.println("Đã thêm khách hàng vào danh sách.\n");
+			System.out.println("Da them khach hang vao danh sach.\n");
 		} else {
-			System.out.println("Chưa truy cập quyền quản trị.\n");
+			System.out.println("Chua truy cap quyen quan tri\n");
 		}
 	}
 
 	public void xoa(KhachHang a) {
 		if (isAdmin()) {
 			this.ds.remove(a);
-			System.out.println("Đã xóa khách hàng khỏi danh sách.\n");
+			System.out.println("Da xoa khach hang khoi danh sach\n");
 		} else {
-			System.out.println("Chưa truy cập quyền quản trị.\n");
+			System.out.println("Chua truy cap quyen quan tri\n");
 		}
 	}
 
 	public KhachHang khachHangDangNhap() {
-		System.out.print("Nhập tên tài khoản: ");
+		System.out.print("Nhap ten tai khoan");
 		String ten = CauHinh.sc.nextLine();
-		System.out.print("Nhập mật khẩu: ");
+		System.out.print("Nhap mat khau: ");
 		String matKhau = CauHinh.sc.nextLine();
 		for (KhachHang x : ds) {
 			if (x.getTkDangNhap().getTenDangNhap().equals(ten) && x.getTkDangNhap().getMatKhau().equals(matKhau)) {
@@ -60,10 +60,10 @@ public class QuanLyKhachHang {
 			}
 		} 
 		if(ds.size() == 0) {
-			System.out.println("Danh sách khách hàng trống.\n");
+			System.out.println("Danh sach khach hang trong\n");
 			return null;
 		}
-		System.out.println("Vui lòng kiểm tra lại tên hoặc mật khẩu.");
+		System.out.println("Vui long kiem tra lai ten hoac mat khau.");
 		return null;
 	}
 

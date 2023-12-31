@@ -15,14 +15,14 @@ public class TaiKhoanKhongKyHan implements TaiKhoan {
 		if (soTien > 0) {
 			soDu += soTien;
 			capNhatlaiSuat();
-			System.out.println("Nạp tiền thành công.\nSố dư hiện tại: " + soDu);
+			System.out.println("Nap tien thanh cong.\nSo du hien tai: " + soDu);
 		} else {
-			System.out.println("Số tiền nạp phải lớn hơn 0.");
+			System.out.println("So tien nap phai lon hon 0.");
 		}
 	}
 
 	public boolean isRutTien() {
-		System.out.print("Nhập số tiền cần rút: ");
+		System.out.print("Nhap so tien can rut: ");
 		double soTien = Double.parseDouble(CauHinh.sc.nextLine());
 		if (soTien > 0) {
 			if (soTien <= soDu) {
@@ -30,17 +30,17 @@ public class TaiKhoanKhongKyHan implements TaiKhoan {
 				capNhatlaiSuat();
 				return true;
 			} else {
-				System.out.println("Số dư không đủ để rút.");
+				System.out.println("So du khong du de rut");
 				return false;
 			}
 		} else {
-			System.out.println("Số tiền rút phải lớn hơn 0.");
+			System.out.println("So tien rut phai lon hon 0");
 			return false;
 		}
 	}
 
 	public void output() {
-		System.out.printf("Số dư: %.1f\nLãi suất: %.2f\n", this.soDu, this.laiSuat);
+		System.out.printf("So du : %.1f\nLai suat: %.2f\n", this.soDu, this.laiSuat);
 	}
 
 	public void capNhatlaiSuat() {

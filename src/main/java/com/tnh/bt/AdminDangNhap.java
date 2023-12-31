@@ -2,8 +2,8 @@ package com.tnh.bt;
 
 public class AdminDangNhap extends DangNhap {
 	
-	private static final String ADMIN_USERNAME = "admin";
-	private static final String ADMIN_PASSWORD = "Admin1234";
+	private final String ADMIN_USERNAME = "admin";
+	private final String ADMIN_PASSWORD = "Admin1234";
 
 	public AdminDangNhap(String tenDangNhap, String matKhau) {
 		super(tenDangNhap, matKhau);
