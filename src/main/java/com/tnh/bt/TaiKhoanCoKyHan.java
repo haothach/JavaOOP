@@ -30,6 +30,7 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 
 	}
 
+	@Override
 	public boolean isRutTien() {
 		if (LocalDate.now().compareTo(ngayDaoHan) < 0) {
 			System.out.println("Khong the rut tien khi chua den ngay dao han!");
@@ -56,7 +57,7 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 
 	public void output() {
 		super.output();
-		System.out.printf("Ky han: %s\nNgay dao han: %s\n", this.kyHan,
+		System.out.printf("Ky han: %s\nNgay dao han: %s\n\n", this.kyHan,
 				this.ngayDaoHan.format(DateTimeFormatter.ofPattern(CauHinh.PATTERN)));
 	}
 	

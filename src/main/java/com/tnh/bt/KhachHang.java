@@ -43,6 +43,15 @@ public class KhachHang implements DoiTuong {
 		this.queQuan = queQuan;
 		this.cccd = cccd;
 	}
+	
+	public KhachHang(String ten, String gioiTinh, String ngaySinh, String queQuan, String cccd) {
+		super();
+		this.ten = ten;
+		this.gioiTinh = gioiTinh;
+		this.ngaySinh = LocalDate.parse(ngaySinh, DateTimeFormatter.ofPattern(CauHinh.PATTERN));
+		this.queQuan = queQuan;
+		this.cccd = cccd;
+	}
 
 	@Override
 	public void moTkKyHan() {
@@ -50,6 +59,7 @@ public class KhachHang implements DoiTuong {
 			System.out.println("Chua mo tai khoan khong ky han\n");
 			return;
 		}
+		System.out.println("===MO TAI KHOAN CO KY HAN===");
 		System.out.print("Nhap so tien: ");
 		double soTien = Double.parseDouble(CauHinh.sc.nextLine());
 		if (this.tkKhongKyHan.getSoDu() - soTien > 50000 && soTien >= 100000) {
@@ -86,10 +96,10 @@ public class KhachHang implements DoiTuong {
 		int choice;
 		do {
 			choice = Integer.parseInt(CauHinh.sc.nextLine());
-			if (choice < 0 || choice > 2) {
+			if (choice < 0 || choice > tkCoKyhan.size()) {
 				System.out.print("Nhập sai. Vui lòng nhập lại: ");
 			}
-		} while (choice < 0 || choice > 2);
+		} while (choice < 0 || choice > tkCoKyhan.size());
 		System.out.print("Nhập số tiền: ");
 		double soTien = Double.parseDouble(CauHinh.sc.nextLine());
 		if (choice == 0) {
@@ -107,12 +117,14 @@ public class KhachHang implements DoiTuong {
 		tkOutput();
 		System.out.println("Bạn muốn rút tiền từ tài khoản nào?");
 		System.out.println("0. Tài khoản không kỳ hạn");
-		System.out.println("1 - " + tkCoKyhan.size() + ". Tài khoản có kỳ hạn tương ứng");
+		if(tkCoKyhan.size() > 0) {
+			System.out.println("1 - " + tkCoKyhan.size() + ". Tài khoản có kỳ hạn tương ứng");
+		}
 		System.out.print("Nhập lựa chọn của bạn: ");
 		int choice;
 		do {
 			choice = Integer.parseInt(CauHinh.sc.nextLine());
-			if (choice < 0 || choice > 2) {
+			if (choice < 0 || choice > tkCoKyhan.size()) {
 				System.out.print("Nhập sai. Vui lòng nhập lại: ");
 			}
 		} while (choice < 0 || choice > 2);
@@ -124,9 +136,9 @@ public class KhachHang implements DoiTuong {
 		} else {
 			TaiKhoanCoKyHan tk = tkCoKyhan.get(choice - 1);
 			if (tk.isRutTien() == true) {
-				System.out.println(this.tkKhongKyHan.getSoDu() + " " + tk.soDu + " " + tk.laiSuat);
-				this.tkKhongKyHan.setSoDu(tk.soDu + this.tkKhongKyHan.getSoDu() + tk.laiSuat);
-				System.out.println("Tai khoan co ky han: " + this.tkKhongKyHan.soDu);
+				System.out.println("Da hoan lai tien vao tai khoan khong ky han");
+				this.tkKhongKyHan.setSoDu(this.tkKhongKyHan.getSoDu() + tk.soDu +  tk.laiSuat);
+				System.out.printf("Tai khoan khong ky han: %.1f", this.tkKhongKyHan.soDu);
 				this.tkCoKyhan.remove(tk);
 			}
 		}
@@ -156,8 +168,8 @@ public class KhachHang implements DoiTuong {
 	@Override
 	public void output() {
 		// TODO Auto-generated method stub
-		System.out.printf("Mã số: %s\nTên: %s\nGiới tính: %s\nNgày sinh: %s\nCăn cước công dân: %s\n", this.maKH,
-				this.ten, this.gioiTinh, this.ngaySinh.format(DateTimeFormatter.ofPattern(CauHinh.PATTERN)), this.cccd);
+		System.out.printf("Mã số: %s\nTên: %s\nGiới tính: %s\nNgày sinh: %s\nQuê quán: %s\nCăn cước công dân: %s\n", this.maKH,
+				this.ten, this.gioiTinh, this.ngaySinh.format(DateTimeFormatter.ofPattern(CauHinh.PATTERN)), this.queQuan, this.cccd);
 		tkKhongKyHanOutput();
 		tkCoKyhanOutput();
 	}
@@ -173,14 +185,14 @@ public class KhachHang implements DoiTuong {
 
 	public void tkKhongKyHanOutput() {
 		if (this.tkKhongKyHan != null) {
-			System.out.println("TÀI KHOẢN KHÔNG KỲ HẠN");
+			System.out.println("\nTÀI KHOẢN KHÔNG KỲ HẠN");
 			this.tkKhongKyHan.output();
 		}
 	}
 
 	public void tkCoKyhanOutput() {
 		if (this.tkCoKyhan.size() != 0) {
-			System.out.println("CÁC TÀI KHOÀN CÓ KỲ HẠN:");
+			System.out.println("\nCÁC TÀI KHOÀN CÓ KỲ HẠN:");
 			for (int i = 0; i < tkCoKyhan.size(); i++) {
 				System.out.println("Tài khoản thứ " + (i + 1));
 				this.tkCoKyhan.get(i).output();
@@ -189,13 +201,8 @@ public class KhachHang implements DoiTuong {
 	}
 
 	public void tkOutput() {
-		System.out.println("TÀI KHOẢN KHÔNG KỲ HẠN");
-		this.tkKhongKyHan.output();
-		System.out.println("CÁC TÀI KHOÀN CÓ KỲ HẠN:");
-		for (int i = 0; i < tkCoKyhan.size(); i++) {
-			System.out.println("Tài khoản thứ " + (i + 1));
-			this.tkCoKyhan.get(i).output();
-		}
+		tkKhongKyHanOutput();
+		tkCoKyhanOutput();
 	}
 
 	public void doiMatKhau() {

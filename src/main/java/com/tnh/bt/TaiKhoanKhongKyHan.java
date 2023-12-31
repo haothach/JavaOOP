@@ -21,6 +21,7 @@ public class TaiKhoanKhongKyHan implements TaiKhoan {
 		}
 	}
 
+	@Override
 	public boolean isRutTien() {
 		System.out.print("Nhap so tien can rut: ");
 		double soTien = Double.parseDouble(CauHinh.sc.nextLine());
