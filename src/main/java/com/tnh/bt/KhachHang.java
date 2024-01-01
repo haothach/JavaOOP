@@ -55,7 +55,7 @@ public class KhachHang implements DoiTuong {
 
         @Override
         public void moTk() {
-            nhapKh();
+//            nhapKh();
             double soTien;
             TaiKhoanKhongKyHan tk = new TaiKhoanKhongKyHan();
             do {
@@ -71,6 +71,7 @@ public class KhachHang implements DoiTuong {
         
 	@Override
 	public void moTkKyHan() {
+		System.out.println("so tien: " + this.tkKhongKyHan.getSoDu());
 		if (this.tkKhongKyHan == null) {
 			System.out.println("Chua mo tai khoan khong ky han\n");
 			return;
@@ -78,7 +79,9 @@ public class KhachHang implements DoiTuong {
 		System.out.println("===MO TAI KHOAN CO KY HAN===");
 		System.out.print("Nhap so tien: ");
 		double soTien = Double.parseDouble(CauHinh.sc.nextLine());
-		if (this.tkKhongKyHan.getSoDu() - soTien > this.tkKhongKyHan.getSoTienToiThieu() && soTien >= 100000) {
+		TaiKhoanCoKyHan tmp = new TaiKhoanCoKyHan();
+		System.out.println("so tien toi thieu: " + tmp.soTienToiThieu);
+		if (this.tkKhongKyHan.getSoDu() - soTien >= this.tkKhongKyHan.getSoTienToiThieu() && soTien >= tmp.soTienToiThieu) {
 			kyHanOutput();
 			System.out.print("Chon: ");
 			int choose;
@@ -94,7 +97,7 @@ public class KhachHang implements DoiTuong {
 			this.tkCoKyhan.add(tkc);
 			this.tkKhongKyHan.soDu -= soTien;
 			this.tkKhongKyHan.capNhatlaiSuat();
-		} else if (soTien < 100000) {
+		} else if (soTien <= tmp.getSoTienToiThieu()) {
 			System.out.println("So tien toi thieu de mo tai khoan la 100 nghin");
 		} else {
 			System.out.println("So tien khong du de mo tai khoan");

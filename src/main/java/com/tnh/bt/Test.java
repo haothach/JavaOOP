@@ -5,18 +5,19 @@ import java.util.Arrays;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-		KhachHang k = new KhachHang();
+		KhachHang k = new KhachHang("Hao", "ád", "12/12/1212", "st", "0000");
 		KhachHang k2 = new KhachHang();
 		
-                k.moTk();
-               
-                k.output();
-            
+		k.moTk();
+		k.moTkKyHan();
+		k2.moTk();
+		k2.output();
+
 //		TaiKhoanKhongKyHan t = new TaiKhoanKhongKyHan(500000);
 //		k.setTkKhongKyHan(t);
 
 //		TaiKhoanKhongKyHan t2 = new TaiKhoanKhongKyHan(400000);
-		
+
 //		k2.setTkKhongKyHan(t2);
 ////		System.out.println(k.getTkKhongKyHan().laiSuat);
 //		TaiKhoanCoKyHan c1 = new TaiKhoanCoKyHan(5000000, KyHan.MOT_NAM);

@@ -9,6 +9,10 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 	private double tmp = super.phanTramLaiSuat;
 	private LocalDate ngayDaoHan;
 
+	public TaiKhoanCoKyHan() {
+		this.soTienToiThieu = 100000;
+	}
+
 	public TaiKhoanCoKyHan(double soDu, KyHan kyHan) {
 		super(soDu);
 		this.kyHan = kyHan;
@@ -34,8 +38,7 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 	public boolean isRutTien() {
 		if (LocalDate.now().compareTo(ngayDaoHan) < 0) {
 			System.out.println("Khong the rut tien khi chua den ngay dao han!");
-			System.out.print("\n"
-					+ "Ban co dong y rut khong?\n1. Co\t2. Khong: ");
+			System.out.print("\n" + "Ban co dong y rut khong?\n1. Co\t2. Khong: ");
 			int choose;
 			do {
 				choose = Integer.parseInt(CauHinh.sc.nextLine());
@@ -60,7 +63,7 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 		System.out.printf("Ky han: %s\nNgay dao han: %s\n\n", this.kyHan,
 				this.ngayDaoHan.format(DateTimeFormatter.ofPattern(CauHinh.PATTERN)));
 	}
-	
+
 	@Override
 	public void capNhatlaiSuat() {
 		this.phanTramLaiSuat = tmp;
