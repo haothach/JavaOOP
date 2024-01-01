@@ -4,7 +4,7 @@ public class TaiKhoanKhongKyHan implements TaiKhoan {
 
     protected double soDu;
     protected double laiSuat;
-    protected double phanTramLaiSuat;
+    protected double phanTramLaiSuat = 0.002;
     private final double soTienToiThieu = 50000;
     
      public TaiKhoanKhongKyHan() {
@@ -12,7 +12,6 @@ public class TaiKhoanKhongKyHan implements TaiKhoan {
 
     public TaiKhoanKhongKyHan(double soDu) {
         this.soDu = soDu;
-        this.phanTramLaiSuat = 0.002;
         this.laiSuat = this.phanTramLaiSuat * soDu;
     }
 
