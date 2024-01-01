@@ -28,7 +28,7 @@ public class QuanLyKhachHang {
 
 	public void them(KhachHang a) {
 		if (isAdmin()) {
-//			a.nhapKh();
+			a.nhapKh();
 			String user = a.getMaKH();
 			String mk = "User" + a.getMaKH().substring(a.getMaKH().length() - 4);
 			a.setTkDangNhap(new NguoiDungDangNhap(user, mk));

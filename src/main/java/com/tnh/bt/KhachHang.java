@@ -53,6 +53,22 @@ public class KhachHang implements DoiTuong {
 		this.cccd = cccd;
 	}
 
+        @Override
+        public void moTk() {
+            nhapKh();
+            double soTien;
+            TaiKhoanKhongKyHan tk = new TaiKhoanKhongKyHan();
+            do {
+            System.out.print("Nhap so tien gui: ");
+            soTien = Double.parseDouble(CauHinh.sc.nextLine());
+            if (soTien < tk.getSoTienToiThieu())
+                    System.out.println("So tien khong hop le");
+            } while(soTien < tk.getSoTienToiThieu());
+            tk.setSoDu(soTien);
+            tk.capNhatlaiSuat();
+            this.tkKhongKyHan = tk;
+        }
+        
 	@Override
 	public void moTkKyHan() {
 		if (this.tkKhongKyHan == null) {
@@ -62,7 +78,7 @@ public class KhachHang implements DoiTuong {
 		System.out.println("===MO TAI KHOAN CO KY HAN===");
 		System.out.print("Nhap so tien: ");
 		double soTien = Double.parseDouble(CauHinh.sc.nextLine());
-		if (this.tkKhongKyHan.getSoDu() - soTien > 50000 && soTien >= 100000) {
+		if (this.tkKhongKyHan.getSoDu() - soTien > this.tkKhongKyHan.getSoTienToiThieu() && soTien >= 100000) {
 			kyHanOutput();
 			System.out.print("Chon: ");
 			int choose;
@@ -161,6 +177,8 @@ public class KhachHang implements DoiTuong {
 				System.out.println("Ngày sinh không hợp lệ. Vui lòng nhập lại.");
 			}
 		} while (!hopLe);
+                System.out.print("Nhập que quan: ");
+		this.queQuan = CauHinh.sc.nextLine();
 		System.out.print("Nhập căn cước công dân: ");
 		this.cccd = CauHinh.sc.nextLine();
 	}
@@ -314,5 +332,7 @@ public class KhachHang implements DoiTuong {
 	public void setTkDangNhap(NguoiDungDangNhap tkDangNhap) {
 		this.tkDangNhap = tkDangNhap;
 	}
+
+    
 
 }
