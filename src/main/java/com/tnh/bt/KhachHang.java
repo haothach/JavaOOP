@@ -69,6 +69,13 @@ public class KhachHang implements DoiTuong {
         tk.setSoDu(soTien);
         tk.capNhatlaiSuat();
         this.tkKhongKyHan = tk;
+        System.out.println("Mo tai khoan thanh cong");
+		String user = this.maKH;
+		String mk = "User" + this.maKH.substring(this.maKH.length() - 4);
+		this.tkDangNhap = new NguoiDungDangNhap(user, mk);
+		System.out.println("So tai khoan: " + this.tkDangNhap.getTenDangNhap());
+		System.out.println("Mat khau: " + this.tkDangNhap.getMatKhau());
+		System.out.println();
     }
 
     @Override
@@ -172,7 +179,7 @@ public class KhachHang implements DoiTuong {
         System.out.println("=========NHAP THONG TIN==========");
         System.out.print("Nhap ten: ");
         this.ten = CauHinh.sc.nextLine();
-        System.out.print("Nhap gioi tien: ");
+        System.out.print("Nhap gioi tinh: ");
         this.gioiTinh = CauHinh.sc.nextLine();
         boolean hopLe = false;
         do {
@@ -193,6 +200,7 @@ public class KhachHang implements DoiTuong {
     @Override
     public void output() {
         // TODO Auto-generated method stub
+    	System.out.println("=====THONG TIN KHACH HANG=====");
         System.out.printf("Ma so: %s\nTen: %s\nGioi tinh: %s\nNgay sinh: %s\nQue quan: %s\nCan cuoc cong dan: %s\n", this.maKH,
                 this.ten, this.gioiTinh, this.ngaySinh.format(DateTimeFormatter.ofPattern(CauHinh.PATTERN)), this.queQuan, this.cccd);
         tkKhongKyHanOutput();
@@ -210,14 +218,14 @@ public class KhachHang implements DoiTuong {
 
     public void tkKhongKyHanOutput() {
         if (this.tkKhongKyHan != null) {
-            System.out.println("\nTAI KHOAN KHONG KY HAN");
+            System.out.println("\n=====TAI KHOAN KHONG KY HAN=====");
             this.tkKhongKyHan.output();
         }
     }
 
     public void tkCoKyhanOutput() {
         if (this.tkCoKyhan.size() != 0) {
-            System.out.println("\nCAC TAI KHOAN CO KY HAN:");
+            System.out.println("\n=====CAC TAI KHOAN CO KY HAN=====");
             for (int i = 0; i < tkCoKyhan.size(); i++) {
                 System.out.println("Tai khoan thu " + (i + 1));
                 this.tkCoKyhan.get(i).output();

@@ -9,15 +9,16 @@ public class QuanLyKhachHang {
 	private AdminDangNhap ad;
 
 	private List<KhachHang> ds = new ArrayList<KhachHang>();
-	
+
 	public boolean isAdmin() {
 		return ad.isDangNhap();
 	}
 
 	public void adminDangNhap() {
-		System.out.print("Nhap tai khoan: ");
+		System.out.println("\n=====NHAP TAI KHOAN ADMIN=====");
+		System.out.print("Tai khoan: ");
 		String admin = CauHinh.sc.nextLine();
-		System.out.print("Nhap mat khau: ");
+		System.out.print("Mat khau: ");
 		String mk = CauHinh.sc.nextLine();
 		this.ad = new AdminDangNhap(admin, mk);
 		if (isAdmin()) {
@@ -29,22 +30,23 @@ public class QuanLyKhachHang {
 
 	public void them(KhachHang a) {
 		if (isAdmin()) {
-			a.moTk();
-			String user = a.getMaKH();
-			String mk = "User" + a.getMaKH().substring(a.getMaKH().length() - 4);
-			a.setTkDangNhap(new NguoiDungDangNhap(user, mk));
-
-			this.ds.addAll(Arrays.asList(a));
+			this.ds.add(a);
 			System.out.println("Da them khach hang vao danh sach.\n");
 		} else {
 			System.out.println("Chua truy cap quyen quan tri\n");
 		}
 	}
 
-	public void xoa(KhachHang a) {
+	public void xoa() {
 		if (isAdmin()) {
-			this.ds.remove(a);
-			System.out.println("Da xoa khach hang khoi danh sach\n");
+			System.out.print("Nhap tai khoan: ");
+			String tk = CauHinh.sc.nextLine();
+			boolean removed = this.ds.removeIf(k -> k.getMaKH().equals(tk));
+			if (removed) {
+				System.out.printf("Da xoa khach hang co ma %s\n", tk);
+			} else {
+				System.out.printf("Khong tim thay khach hang co ma %s\n", tk);
+			}
 		} else {
 			System.out.println("Chua truy cap quyen quan tri\n");
 		}
@@ -60,18 +62,26 @@ public class QuanLyKhachHang {
 				System.out.println("\n====DANG NHAP THANH CONG====");
 				return x;
 			}
-		} 
-		if(ds.size() == 0) {
+		}
+		if (ds.size() == 0) {
 			System.out.println("Danh sach khach hang trong\n");
 			return null;
 		}
 		System.out.println("Vui long kiem tra lai ten hoac mat khau.");
 		return null;
 	}
+	
+	public void output() {
+		if(ds.size() != 0) 
+			for(KhachHang x : ds) {
+				x.output();
+			}
+		else System.out.println("Danh sach khach hang trong!!!");
+	}
 
-        public KhachHang tinhTienLai(String stk) {
-          
-        }
+	public KhachHang tinhTienLai(String stk) {
+		return this.ds.stream().filter(h -> h.getMaKH().equals(stk)).findFirst().orElse(null);
+	}
 
 	public List<KhachHang> getDs() {
 		return ds;

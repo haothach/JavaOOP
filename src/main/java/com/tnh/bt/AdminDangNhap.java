@@ -13,7 +13,6 @@ public class AdminDangNhap extends DangNhap {
 	@Override
 	public boolean isDangNhap() {
 		return this.getTenDangNhap().equals(ADMIN_USERNAME) && this.getMatKhau().equals(ADMIN_PASSWORD);
-		
 	}
 
 }

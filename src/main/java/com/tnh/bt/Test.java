@@ -7,6 +7,6 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
      Menu me = new Menu();
-     me.chooseFunction();
+     me.chonLoaiTaiKhoan();
     }
 }
