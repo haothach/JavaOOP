@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class QuanLyKhachHang {
 	private AdminDangNhap ad;
 
-	private List<KhachHang> ds = new ArrayList<KhachHang>();
+	private List<KhachHang> ds = new ArrayList<>();
 
 	public boolean isAdmin() {
 		return ad.isDangNhap();
@@ -70,18 +70,60 @@ public class QuanLyKhachHang {
 		System.out.println("Vui long kiem tra lai ten hoac mat khau.");
 		return null;
 	}
-	
+
 	public void output() {
-		if(ds.size() != 0) 
-			for(KhachHang x : ds) {
+		if (ds.size() != 0)
+			for (KhachHang x : ds) {
 				x.output();
 			}
-		else System.out.println("Danh sach khach hang trong!!!");
+		else
+			System.out.println("Danh sach khach hang trong!!!");
 	}
 
-	public KhachHang tinhTienLai(String stk) {
-		return this.ds.stream().filter(h -> h.getMaKH().equals(stk)).findFirst().orElse(null);
+	public void tinhTienLai(String stk) {
+		KhachHang a = this.ds.stream().filter(h -> h.getMaKH().equals(stk)).findFirst().orElse(null);
+		if (a != null) {
+			double laiSuatKhongKyHan = a.getTkKhongKyHan().getLaiSuat();
+			List<Double> laiSuatCoKyHan = new ArrayList<>();
+			for (int i = 0; i < a.getTkCoKyhan().size(); i++) {
+				laiSuatCoKyHan.add(a.getTkCoKyhan().get(i).getLaiSuat());
+
+			}
+			int choice;
+			do {
+				System.out.println("1. Lai suat tai khoan chinh");
+				System.out.println("2. Lai suat tai khoan co ky han");
+				System.out.println("0. Thoat !");
+				System.out.println("Vui long lua chon chuc nang: ");
+				choice = Integer.parseInt(CauHinh.sc.nextLine());
+				switch (choice) {
+				case 1:
+					System.out.println("Lai suat tai khoan chinh la: " + laiSuatKhongKyHan);
+					break;
+				case 2:
+					if (laiSuatCoKyHan.size() > 0) {
+						final int[] dem = { 0 };
+						laiSuatCoKyHan.forEach(h -> {
+							System.out.printf("Lai suat tai khoan " + ++dem[0] + " la: " + h);
+						});
+					} else
+						System.out.println("Ban khong co tai khoan co ky han nao!");
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Vui long nhap lai lua chon!");
+				}
+			} while (choice != 0);
+		} else
+			System.out.println("Khong tim thay khach hang!");
 	}
+	
+	public List<KhachHang> traCuuKhachHang(String kw) {
+		return this.ds.stream().filter(h -> h.getTen().contains(kw)).collect(Collectors.toList());
+	}
+	
+
 
 	public List<KhachHang> getDs() {
 		return ds;

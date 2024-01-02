@@ -25,12 +25,12 @@ public class KhachHang implements DoiTuong {
 
     private TaiKhoanKhongKyHan tkKhongKyHan;
 
-    private List<TaiKhoanCoKyHan> tkCoKyhan = new ArrayList<TaiKhoanCoKyHan>();
+    private List<TaiKhoanCoKyHan> tkCoKyhan = new ArrayList<>();
 
     private NguoiDungDangNhap tkDangNhap;
 
     {
-        this.maKH = String.format("%s%04d", LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyy")), ++dem);
+        this.maKH = String.format("%s%04d", LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")), ++dem);
     }
 
     public KhachHang() {
@@ -56,7 +56,7 @@ public class KhachHang implements DoiTuong {
 
     @Override
     public void moTk() {
-        nhapKh();
+//        nhapKh();
         double soTien;
         TaiKhoanKhongKyHan tk = new TaiKhoanKhongKyHan();
         do {
