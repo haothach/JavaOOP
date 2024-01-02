@@ -3,6 +3,7 @@ package com.tnh.bt;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class QuanLyKhachHang {
 	private AdminDangNhap ad;
@@ -28,7 +29,7 @@ public class QuanLyKhachHang {
 
 	public void them(KhachHang a) {
 		if (isAdmin()) {
-			a.nhapKh();
+			a.moTk();
 			String user = a.getMaKH();
 			String mk = "User" + a.getMaKH().substring(a.getMaKH().length() - 4);
 			a.setTkDangNhap(new NguoiDungDangNhap(user, mk));
@@ -68,7 +69,9 @@ public class QuanLyKhachHang {
 		return null;
 	}
 
-
+        public KhachHang tinhTienLai(String stk) {
+          
+        }
 
 	public List<KhachHang> getDs() {
 		return ds;
