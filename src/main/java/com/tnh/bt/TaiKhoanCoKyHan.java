@@ -38,6 +38,7 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 	public boolean isRutTien() {
 		if (LocalDate.now().compareTo(ngayDaoHan) < 0) {
 			System.out.println("Khong the rut tien khi chua den ngay dao han!");
+			System.out.println("Neu rut, so tien se hoan lai vao tai khoan chinh voi lai suat goc");
 			System.out.print("\n" + "Ban co dong y rut khong?\n1. Co\t2. Khong: ");
 			int choose;
 			do {

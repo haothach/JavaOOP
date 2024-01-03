@@ -19,25 +19,17 @@ public abstract class DangNhap {
 	}
 	
 	public static boolean isMatKhauHopLe(String matKhau) {
-        if (matKhau.length() < 8) {
+        if (matKhau.length() < 6) {
             return false;
         }
-        boolean coKyTuHoa = false;
-        boolean coKyTuThuong = false;
-        boolean coSo = false;
-        for (int i = 0; i < matKhau.length(); i++) {
-            char c = matKhau.charAt(i);
-            if (Character.isUpperCase(c)) {
-                coKyTuHoa = true;
-            } else if (Character.isLowerCase(c)) {
-                coKyTuThuong = true;
-            } else if (Character.isDigit(c)) {
-                coSo = true;
-            } else {
+        
+        for(int i = 0; i < matKhau.length(); i++) {
+        	char c =matKhau.charAt(i);
+        	if (!Character.isDigit(c)) {
                 return false;
             }
         }
-        return coKyTuHoa && coKyTuThuong && coSo;
+        return true;
     }
 
 	public String getTenDangNhap() {

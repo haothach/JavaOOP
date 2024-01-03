@@ -2,10 +2,11 @@ package com.tnh.bt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class QuanLyKhachHang {
+public class QuanLyKhachHang{
 	private AdminDangNhap ad;
 
 	private List<KhachHang> ds = new ArrayList<>();
@@ -22,9 +23,9 @@ public class QuanLyKhachHang {
 		String mk = CauHinh.sc.nextLine();
 		this.ad = new AdminDangNhap(admin, mk);
 		if (isAdmin()) {
-			System.out.println("Dang nhap thanh cong voi quyen quan tri\n");
+			System.out.println("Dang nhap thanh cong voi quyen quan tri!!!\n");
 		} else {
-			System.out.println("Dang nhap that bai. Vui long kiem tra lai ten dang nhap va mat khau.\n");
+			System.out.println("Dang nhap that bai. Vui long kiem tra lai ten dang nhap va mat khau!!!\n");
 		}
 	}
 
@@ -59,7 +60,7 @@ public class QuanLyKhachHang {
 		String matKhau = CauHinh.sc.nextLine();
 		for (KhachHang x : ds) {
 			if (x.getTkDangNhap().getTenDangNhap().equals(ten) && x.getTkDangNhap().getMatKhau().equals(matKhau)) {
-				System.out.println("\n====DANG NHAP THANH CONG====");
+				System.out.println("DANG NHAP THANH CONG!!!\n");
 				return x;
 			}
 		}
@@ -77,7 +78,7 @@ public class QuanLyKhachHang {
 				x.output();
 			}
 		else
-			System.out.println("Danh sach khach hang trong!!!");
+			System.out.println("Danh sach khach hang trong!!!\n");
 	}
 
 	public void tinhTienLai(String stk) {
@@ -91,23 +92,23 @@ public class QuanLyKhachHang {
 			}
 			int choice;
 			do {
+				System.out.println("\nTAI KHOAN CAN TINH LAI SUAT");
 				System.out.println("1. Lai suat tai khoan chinh");
 				System.out.println("2. Lai suat tai khoan co ky han");
 				System.out.println("0. Thoat !");
-				System.out.println("Vui long lua chon chuc nang: ");
+				System.out.print("Vui long lua chon chuc nang: ");
 				choice = Integer.parseInt(CauHinh.sc.nextLine());
 				switch (choice) {
 				case 1:
-					System.out.println("Lai suat tai khoan chinh la: " + laiSuatKhongKyHan);
+					System.out.printf("Lai suat tai khoan chinh la: %.1f\n\n", laiSuatKhongKyHan);
 					break;
 				case 2:
 					if (laiSuatCoKyHan.size() > 0) {
-						final int[] dem = { 0 };
-						laiSuatCoKyHan.forEach(h -> {
-							System.out.printf("Lai suat tai khoan " + ++dem[0] + " la: " + h);
-						});
+						for (int i = 0; i < laiSuatCoKyHan.size(); i++) {
+							System.out.printf("Lai suat tai khoan thu %d la: %.1f\n\n", (i + 1), laiSuatCoKyHan.get(i));
+						}
 					} else
-						System.out.println("Ban khong co tai khoan co ky han nao!");
+						System.out.println("\nBan khong co tai khoan co ky han nao!\n");
 					break;
 				case 0:
 					break;
@@ -116,14 +117,29 @@ public class QuanLyKhachHang {
 				}
 			} while (choice != 0);
 		} else
-			System.out.println("Khong tim thay khach hang!");
+			System.out.println("Khong tim thay khach hang!\n");
 	}
-	
-	public List<KhachHang> traCuuKhachHang(String kw) {
+
+	public List<KhachHang> traCuuTheoHoTen(String kw) {
 		return this.ds.stream().filter(h -> h.getTen().contains(kw)).collect(Collectors.toList());
 	}
 	
-
+	public KhachHang traCuuTheoMa(String ma) {
+		return this.ds.stream().filter(h -> h.getMaKH().equals(ma)).findFirst().orElse(null);
+	}
+	
+	public void traCuuDsTk(String ma) {
+		KhachHang o = this.ds.stream().filter(h -> h.getMaKH().equals(ma)).findFirst().orElse(null);
+		if(o != null) {
+			o.tkOutput();
+		}
+		
+		else System.out.println("Khong tim thay khach hang");
+	}
+	
+	public void sapXep() {
+		this.ds.sort(Comparator.comparing(KhachHang::tinhTong).reversed());
+	}
 
 	public List<KhachHang> getDs() {
 		return ds;
