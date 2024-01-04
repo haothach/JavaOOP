@@ -12,7 +12,6 @@ public abstract class DangNhap {
 		this.matKhau = matKhau;
 	}
 
-	public abstract boolean isDangNhap();
 
 	public void dangXuat() {
 		System.out.println("Dang xuat thanh cong\n");

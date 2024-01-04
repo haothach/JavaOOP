@@ -86,10 +86,9 @@ public class QuanLyKhachHang {
 		if (a != null) {
 			double laiSuatKhongKyHan = a.getTkKhongKyHan().getLaiSuat();
 			List<Double> laiSuatCoKyHan = new ArrayList<>();
-			for (int i = 0; i < a.getTkCoKyhan().size(); i++) {
-				laiSuatCoKyHan.add(a.getTkCoKyhan().get(i).getLaiSuat());
-
-			}
+			for (TaiKhoanCoKyHan tk : a.getTkCoKyhan()) {
+				  laiSuatCoKyHan.add(tk.getLaiSuat());
+				}
 			int choice;
 			do {
 				System.out.println("\nTAI KHOAN CAN TINH LAI SUAT");
@@ -104,9 +103,12 @@ public class QuanLyKhachHang {
 					break;
 				case 2:
 					if (laiSuatCoKyHan.size() > 0) {
-						for (int i = 0; i < laiSuatCoKyHan.size(); i++) {
-							System.out.printf("\nLai suat tai khoan thu %d la: %.1f\n", (i + 1), laiSuatCoKyHan.get(i));
+						int i = 1;
+						for (Double ls : laiSuatCoKyHan) {
+						  System.out.printf("\nLai suat tai khoan thu %d la: %.1f\n", i, ls);
+						  i++;
 						}
+
 					} else
 						System.out.println("\nBan khong co tai khoan co ky han nao!!!\n");
 					break;
@@ -146,10 +148,13 @@ public class QuanLyKhachHang {
 		else System.out.println("Khong tim thay khach hang!!!");
 		return null;
 	}
+	
 
 	public void sapXep() {
 		this.ds.sort(Comparator.comparing(KhachHang::tinhTong).reversed());
 	}
+	
+	
 
 	public List<KhachHang> getDs() {
 		return ds;

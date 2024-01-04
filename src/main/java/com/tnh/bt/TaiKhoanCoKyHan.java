@@ -83,7 +83,7 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 
 	@Override
 	public double getSoDu() {
-		return getSoDu();
+		return soDu;
 	}
 
 	public KyHan getKyHan() {

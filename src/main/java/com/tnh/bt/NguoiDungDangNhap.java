@@ -7,10 +7,5 @@ public class NguoiDungDangNhap extends DangNhap {
 		super(tenDangNhap, matKhau);
 	}
 
-	@Override
-	public boolean isDangNhap() {
-		return true;
-	}
-
 
 }

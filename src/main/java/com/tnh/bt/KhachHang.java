@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.DoubleStream;
 
 public class KhachHang implements DoiTuong {
 
@@ -57,7 +58,7 @@ public class KhachHang implements DoiTuong {
 
 	@Override
 	public void moTk() {
-		nhapKh();
+//		nhapKh();
 		double soTien;
 		TaiKhoanKhongKyHan tk = new TaiKhoanKhongKyHan();
 		do {
@@ -114,22 +115,16 @@ public class KhachHang implements DoiTuong {
 			this.tkCoKyhan.add(tkc);
 			this.tkKhongKyHan.soDu -= soTien;
 			this.tkKhongKyHan.capNhatlaiSuat();
-		} else if (soTien <= tmp.getSoTienToiThieu()) {
-			System.out.println("So tien toi thieu de mo tai khoan la 100 nghin");
+		} else if (soTien < tmp.getSoTienToiThieu()) {
+			System.out.println("So tien toi thieu de mo tai khoan la 100 nghin.");
 		} else {
-			System.out.println("So tien khong du de mo tai khoan");
+			System.out.println("So du con lai se duoi muc toi thieu, nen khong the mo tai khoan!");
 		}
 	}
 
 	@Override
 	public void napTien() {
-		System.out.println("=====NAP TIEN=====");
-		tkOutput();
-		System.out.println("Ban muon nap tien vao tai khoan nao?");
-		System.out.println("0. Tai khoan khong ky han");
-		if (tkCoKyhan.size() > 0)
-			System.out.printf("1 - %d: Tai khoan co ky han tuong ung\n", this.tkCoKyhan.size());
-		System.out.print("Nhap lua chon cua ban: ");
+		
 		int choice;
 		do {
 			choice = Integer.parseInt(CauHinh.sc.nextLine());
@@ -150,14 +145,6 @@ public class KhachHang implements DoiTuong {
 
 	@Override
 	public void rutTien() {
-		System.out.println("=====RUT TIEN=====");
-		tkOutput();
-		System.out.println("Ban muon rut tien tu tai khoan nao?");
-		System.out.println("0. Tai khoan khong ky han");
-		if (tkCoKyhan.size() > 0) {
-			System.out.println("1 - " + tkCoKyhan.size() + ". Tai khoan co ky han tuong ung");
-		}
-		System.out.print("Nhap lua chon cua ban: ");
 		int choice;
 		do {
 			choice = Integer.parseInt(CauHinh.sc.nextLine());
@@ -235,8 +222,10 @@ public class KhachHang implements DoiTuong {
 	public void kyHanOutput() {
 		System.out.println("==CAC LOAI KY HAN==");
 		KyHan kh[] = KyHan.values();
-		for (int i = 0; i < kh.length; i++) {
-			System.out.println((i + 1) + ". " + kh[i]);
+		int i = 1;
+		for (KyHan k : kh) {
+		  System.out.println(i + ". " + k);
+		  i++;
 		}
 		System.out.println();
 	}
@@ -251,9 +240,11 @@ public class KhachHang implements DoiTuong {
 	public void tkCoKyhanOutput() {
 		if (this.tkCoKyhan.size() != 0) {
 			System.out.println("\nCAC TAI KHOAN CO KY HAN");
-			for (int i = 0; i < tkCoKyhan.size(); i++) {
-				System.out.println("Tai khoan thu " + (i + 1));
-				this.tkCoKyhan.get(i).output();
+			int i = 1;
+			for (TaiKhoan tk : tkCoKyhan) {
+			  System.out.println("Tai khoan thu " + i);
+			  tk.output();
+			  i++;
 			}
 		}
 	}
@@ -303,13 +294,8 @@ public class KhachHang implements DoiTuong {
 	}
 
 	public double tinhTong() {
-		double tong = 0;
-		tong += this.tkKhongKyHan.soDu;
-		for (TaiKhoanCoKyHan tk : tkCoKyhan) {
-			tong += tk.getSoDu();
+		return this.tkKhongKyHan.soDu + this.tkCoKyhan.stream().flatMapToDouble(t -> DoubleStream.of(t.soDu)).sum();
 		}
-		return tong;
-	}
 
 	public String getMaKH() {
 		return maKH;

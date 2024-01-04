@@ -21,7 +21,7 @@ public class Menu {
 		System.out.println("5. Tra cuu khach hang");
 		System.out.println("6. Tra cuu danh sach tai khoan");
 		System.out.println("7. Sap xep");
-		System.out.println("0. Thoat");
+		System.out.println("0. Dang xuat");
 		System.out.print("Vui long nhap lua chon: ");
 
 	}
@@ -33,7 +33,7 @@ public class Menu {
 		System.out.println("3. Rut tien");
 		System.out.println("4. Doi mat khau");
 		System.out.println("5. Hien thi tai khoan");
-		System.out.println("0. Thoat");
+		System.out.println("0. Dang xuat");
 		System.out.print("Vui long nhap lua chon: ");
 	}
 
@@ -147,6 +147,7 @@ public class Menu {
 						System.out.println("\nDanh sach tai khoan trong!!!\n");
 					break;
 				case 0:
+					ql.getAd().dangXuat();
 					break;
 				default:
 					System.out.println("Lua chon khong hop le. Vui long thu lai.");
@@ -168,9 +169,24 @@ public class Menu {
 				a.moTkKyHan();
 				break;
 			case 2:
+				System.out.println("=====NAP TIEN=====");
+				a.tkOutput();
+				System.out.println("Ban muon nap tien vao tai khoan nao?");
+				System.out.println("0. Tai khoan khong ky han");
+				if (a.getTkCoKyhan().size() > 0)
+					System.out.printf("1 - %d: Tai khoan co ky han tuong ung\n", a.getTkCoKyhan().size());
+				System.out.print("Nhap lua chon cua ban: ");
 				a.napTien();
 				break;
 			case 3:
+				System.out.println("=====RUT TIEN=====");
+				a.tkOutput();
+				System.out.println("Ban muon rut tien tu tai khoan nao?");
+				System.out.println("0. Tai khoan khong ky han");
+				if (a.getTkCoKyhan().size() > 0) {
+					System.out.println("1 - " + a.getTkCoKyhan().size() + ". Tai khoan co ky han tuong ung");
+				}
+				System.out.print("Nhap lua chon cua ban: ");
 				a.rutTien();
 				break;
 			case 4:
@@ -180,6 +196,7 @@ public class Menu {
 				a.tkOutput();
 				break;
 			case 0:
+				a.getTkDangNhap().dangXuat();
 				break;
 			default:
 				System.out.println("Lua chon khong hop le. Vui long thu lai.");
