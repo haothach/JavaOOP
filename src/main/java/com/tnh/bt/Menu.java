@@ -20,7 +20,7 @@ public class Menu {
 		System.out.println("4. Hien thi danh sach khach hang");
 		System.out.println("5. Tra cuu khach hang");
 		System.out.println("6. Tra cuu danh sach tai khoan");
-		System.out.println("7. Sap xep");
+		System.out.println("7. Sap xep giam dan theo tong so tien gui");
 		System.out.println("0. Dang xuat");
 		System.out.print("Vui long nhap lua chon: ");
 

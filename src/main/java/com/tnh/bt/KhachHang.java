@@ -31,9 +31,6 @@ public class KhachHang implements DoiTuong {
 
 	private NguoiDungDangNhap tkDangNhap;
 
-	{
-		this.maKH = String.format("%s%04d", LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")), ++dem);
-	}
 
 	public KhachHang() {
 	}
@@ -58,7 +55,8 @@ public class KhachHang implements DoiTuong {
 
 	@Override
 	public void moTk() {
-//		nhapKh();
+		this.maKH = String.format("%s%04d", LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")), ++dem);
+		nhapKh();
 		double soTien;
 		TaiKhoanKhongKyHan tk = new TaiKhoanKhongKyHan();
 		do {
