@@ -57,7 +57,7 @@ public class KhachHang implements DoiTuong {
 
 	@Override
 	public void moTk() {
-        nhapKh();
+		nhapKh();
 		double soTien;
 		TaiKhoanKhongKyHan tk = new TaiKhoanKhongKyHan();
 		do {
@@ -79,7 +79,7 @@ public class KhachHang implements DoiTuong {
 			int number = random.nextInt(10);
 			kq += number;
 		}
-		String mk = kq;
+		String mk = kq.substring(0);
 		this.tkDangNhap = new NguoiDungDangNhap(user, mk);
 		System.out.println("So tai khoan: " + this.tkDangNhap.getTenDangNhap());
 		System.out.println("Mat khau: " + this.tkDangNhap.getMatKhau());
@@ -88,7 +88,7 @@ public class KhachHang implements DoiTuong {
 
 	@Override
 	public void moTkKyHan() {
-		System.out.println("so tien: " + this.tkKhongKyHan.getSoDu());
+		System.out.printf("\nSo du: %.1f\n\n", this.tkKhongKyHan.getSoDu());
 		if (this.tkKhongKyHan == null) {
 			System.out.println("Chua mo tai khoan khong ky han\n");
 			return;
@@ -128,8 +128,8 @@ public class KhachHang implements DoiTuong {
 		System.out.println("Ban muon nap tien vao tai khoan nao?");
 		System.out.println("0. Tai khoan khong ky han");
 		if (tkCoKyhan.size() > 0)
-			System.out.printf("1 - %d: Tai khoan co ky han tuong ung", this.tkCoKyhan.size());
-		System.out.print("Nhap lua chon cua a ban: ");
+			System.out.printf("1 - %d: Tai khoan co ky han tuong ung\n", this.tkCoKyhan.size());
+		System.out.print("Nhap lua chon cua ban: ");
 		int choice;
 		do {
 			choice = Integer.parseInt(CauHinh.sc.nextLine());
@@ -185,11 +185,27 @@ public class KhachHang implements DoiTuong {
 
 	@Override
 	public void nhapKh() {
-		System.out.println("=========NHAP THONG TIN==========");
+		System.out.println("\n=========NHAP THONG TIN==========");
 		System.out.print("Nhap ten: ");
 		this.ten = CauHinh.sc.nextLine();
-		System.out.print("Nhap gioi tinh: ");
-		this.gioiTinh = CauHinh.sc.nextLine();
+		int choose;
+		do {
+			System.out.print("Nhap gioi tinh(0.Nam/1.Nu): ");
+			try {
+				choose = Integer.parseInt(CauHinh.sc.nextLine());
+				if (choose < 0 || choose > 1) {
+					System.out.println("Nhap sai. Vui long nhap lai!");
+					choose = -1; 
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Nhap sai. Vui long nhap lai!");
+				choose = -1; 
+			}
+		} while (choose < 0 || choose > 1);
+		if (choose == 0)
+			this.gioiTinh = "Nam";
+		else
+			this.gioiTinh = "Nu";
 		boolean hopLe = false;
 		do {
 			System.out.print("Nhap ngay sinh(dd/MM/yyyy): ");
@@ -208,7 +224,6 @@ public class KhachHang implements DoiTuong {
 
 	@Override
 	public void output() {
-		// TODO Auto-generated method stub
 		System.out.println("\n=====THONG TIN KHACH HANG=====");
 		System.out.printf("Ma so: %s\nTen: %s\nGioi tinh: %s\nNgay sinh: %s\nQue quan: %s\nCan cuoc cong dan: %s\n",
 				this.maKH, this.ten, this.gioiTinh, this.ngaySinh.format(DateTimeFormatter.ofPattern(CauHinh.PATTERN)),

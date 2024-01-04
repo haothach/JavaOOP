@@ -45,7 +45,7 @@ public class TaiKhoanKhongKyHan implements TaiKhoan {
 	}
 
 	public void output() {
-		System.out.printf("So du : %.1f\nLai suat: %.2f\n", this.soDu, this.laiSuat);
+		System.out.printf("\nSo du : %.1f\nLai suat: %.2f\n\n", this.soDu, this.laiSuat);
 	}
 
 	public void capNhatlaiSuat() {

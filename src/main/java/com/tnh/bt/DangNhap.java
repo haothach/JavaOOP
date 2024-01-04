@@ -2,9 +2,9 @@ package com.tnh.bt;
 
 public abstract class DangNhap {
 
-	protected String tenDangNhap;
+	private String tenDangNhap;
 
-	protected String matKhau;
+	private String matKhau;
 
 
 	public DangNhap(String tenDangNhap, String matKhau) {

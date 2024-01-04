@@ -38,25 +38,35 @@ public class Menu {
 	}
 
 	public void chonLoaiTaiKhoan() {
-		int choice;
+		int choice = -1;
 		do {
 			menuTaiKhoan();
-			choice = Integer.parseInt(CauHinh.sc.nextLine());
-			switch (choice) {
-			case 1:
-				ql.adminDangNhap();
-				chucNangAdmin();
-				break;
-			case 2:
-				KhachHang a = new KhachHang();
-				a = ql.khachHangDangNhap();
-				chucNangKhachHang(a);
-				break;
-			case 0:
-				System.out.println("Cam on ban da su dung chuong trinh.");
-				break;
-			default:
-				System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
+			try {
+				choice = Integer.parseInt(CauHinh.sc.nextLine());
+				switch (choice) {
+				case 1:
+					ql.adminDangNhap();
+					if (ql.isAdmin() == false)
+						break;
+					chucNangAdmin();
+					break;
+				case 2:
+					KhachHang a = new KhachHang();
+					a = ql.khachHangDangNhap();
+					if (a == null) {
+						System.out.println("Dang nhap that bai!!!");
+						break;
+					}
+					chucNangKhachHang(a);
+					break;
+				case 0:
+					System.out.println("Cam on ban da su dung chuong trinh.");
+					break;
+				default:
+					System.out.println("Lua chon khong hop le. Vui long thu lai.");
+				}
+			} catch (NumberFormatException ex) {			
+				System.out.println("Chi duoc nhap so!");
 			}
 
 		} while (choice != 0);
@@ -66,73 +76,84 @@ public class Menu {
 		int choice;
 		do {
 			menuAdmin();
-			choice = Integer.parseInt(CauHinh.sc.nextLine());
-			switch (choice) {
-			case 1:
-				KhachHang a = new KhachHang();
-				a.moTk();
-				ql.them(a);
-				break;
-			case 2:
-				ql.xoa();
-				break;
-			case 3:
-				String stk;
-				System.out.print("Nhap stk can tinh tien lai: ");
-				stk = CauHinh.sc.nextLine();
-				ql.tinhTienLai(stk);
-				break;
-			case 4:
-				ql.output();
-				break;
-			case 5: {
-				int choose;
-				System.out.println("\n---TRA CUU KHACH HANG---");
-				System.out.println("\n1. Theo ho ten");
-				System.out.println("2. Theo ma khach hang");
-				System.out.print("Nhap lua chon: ");
-				do {
-					choose = Integer.parseInt(CauHinh.sc.nextLine());
-					if (choose > 2 || choose < 1) {
-						System.out.print("Lua chon khong hop le. Nhap lai: ");
+			try {
+				choice = Integer.parseInt(CauHinh.sc.nextLine());
+				switch (choice) {
+				case 1:
+					KhachHang a = new KhachHang();
+					a.moTk();
+					ql.them(a);
+					break;
+				case 2:
+					ql.xoa();
+					break;
+				case 3:
+					String stk = "";
+					System.out.print("Nhap so tai khoan can tinh tien lai: ");
+					stk = CauHinh.sc.nextLine();
+					ql.tinhTienLai(stk);
+					break;
+				case 4:
+					ql.output();
+					break;
+				case 5: {
+					int choose;
+					do {
+						System.out.println("\n---TRA CUU KHACH HANG---");
+						System.out.println("\n1. Theo ho ten");
+						System.out.println("2. Theo ma khach hang");
+						System.out.print("Nhap lua chon: ");
+						try {
+							choose = Integer.parseInt(CauHinh.sc.nextLine());
+							if (choose > 2 || choose < 1) {
+								System.out.print("Nhap sai. Vui long nhap lai!");
+
+							}
+						} catch (NumberFormatException e) {
+							System.out.println("Nhap sai. Vui long nhap lai!");
+							choose = -1;
+						}
+					} while (choose > 2 || choose < 1);
+					if (choose == 1) {
+						System.out.print("Nhap ten: ");
+						String kw = CauHinh.sc.nextLine();
+						if (ql.traCuuTheoHoTen(kw).size() > 0) {
+							ql.traCuuTheoHoTen(kw).forEach(h -> h.output());
+						} else
+							System.out.println("Khong co khach hang can tim!!!");
+					} else {
+						System.out.print("Nhap ma khach hang: ");
+						String kw = CauHinh.sc.nextLine();
+						KhachHang o = ql.traCuuTheoMa(kw);
+						if (o != null) {
+							System.out.println("KHACH HANG CAN TIM");
+							o.output();
+						} else
+							System.out.println("Khong tim thay khach hang!!!");
 					}
-				} while (choose > 2 || choose < 1);
-				if (choose == 1) {
-					System.out.print("Nhap ten: ");
-					String kw = CauHinh.sc.nextLine();
-					if (ql.traCuuTheoHoTen(kw).size() > 0) {
-						ql.traCuuTheoHoTen(kw).forEach(h -> h.output());
-					} else
-						System.out.println("Khong co khach hang can tim!!!");
-				} else {
+				}
+					break;
+				case 6:
 					System.out.print("Nhap ma khach hang: ");
 					String kw = CauHinh.sc.nextLine();
-					KhachHang o = ql.traCuuTheoMa(kw);
-					if (ql.traCuuTheoMa(kw) != null) {
-						System.out.println("KHACH HANG CAN TIM");
-						o.output();
-					}
-					else System.out.println("Khong tim thay khach hang!!!");
-				}
-			}
-				break;
-			case 6:
-				System.out.print("Nhap ma khach hang: ");
-				String kw = CauHinh.sc.nextLine();
-				ql.traCuuDsTk(kw);
-				break;
+					ql.traCuuDsTk(kw);
+					break;
 
-			case 7:
-				if(ql.getDs().size() > 0) {
-					ql.sapXep();
-					System.out.println("Da sap xep!!!\n");
+				case 7:
+					if (ql.getDs().size() > 0) {
+						ql.sapXep();
+						System.out.println("\nDa sap xep!!!\n");
+					} else
+						System.out.println("\nDanh sach tai khoan trong!!!\n");
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Lua chon khong hop le. Vui long thu lai.");
 				}
-				else System.out.println("Danh sach tai khoan trong!!!\n");
-				break;
-			case 0:
-				break;
-			default:
-				System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
+			} catch (NumberFormatException e) {
+				System.out.println("Nhap sai. Vui long nhap lai!");
+				choice = -1;
 			}
 		} while (choice != 0);
 	}
@@ -161,7 +182,7 @@ public class Menu {
 			case 0:
 				break;
 			default:
-				System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
+				System.out.println("Lua chon khong hop le. Vui long thu lai.");
 			}
 
 		} while (choice != 0);

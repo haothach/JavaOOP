@@ -31,7 +31,6 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 			System.out.println("Da gui tien thanh cong");
 			System.out.printf("So du: %.2f\n", this.soDu);
 		}
-
 	}
 
 	@Override
@@ -74,19 +73,16 @@ public class TaiKhoanCoKyHan extends TaiKhoanKhongKyHan implements TaiKhoan {
 
 	@Override
 	public double getLaiSuat() {
-		// TODO Auto-generated method stub
 		return laiSuat;
 	}
 
 	@Override
 	public double getPhanTramLaiSuat() {
-		// TODO Auto-generated method stub
 		return phanTramLaiSuat;
 	}
 
 	@Override
 	public double getSoDu() {
-		// TODO Auto-generated method stub
 		return getSoDu();
 	}
 
